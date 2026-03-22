@@ -20,6 +20,16 @@ import { BUSINESS_INFO, CATEGORIES, PRODUCTS, FEATURES } from './data';
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [visitCount, setVisitCount] = useState<number>(0);
+
+  useEffect(() => {
+    // Local visit counter
+    const storedVisits = localStorage.getItem('proconstructor_visits');
+    const currentVisits = storedVisits ? parseInt(storedVisits, 10) : 0;
+    const newVisits = currentVisits + 1;
+    localStorage.setItem('proconstructor_visits', newVisits.toString());
+    setVisitCount(newVisits);
+  }, []);
 
   const handleWhatsApp = (productName?: string) => {
     const message = productName 
@@ -368,6 +378,16 @@ export default function App() {
                 <MessageCircle className="w-6 h-6" /> COTIZAR POR WHATSAPP
               </button>
             </div>
+            
+            <div className="flex flex-col items-center gap-4 mb-8">
+              <div className="bg-white/5 px-4 py-2 rounded-full border border-white/10 flex items-center gap-2">
+                <div className="w-2 h-2 bg-industrial-yellow rounded-full animate-pulse" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                  Visitas al catálogo: <span className="text-white">{visitCount}</span>
+                </span>
+              </div>
+            </div>
+
             <p className="text-neutral-600 text-xs font-medium tracking-widest uppercase">
               © {new Date().getFullYear()} FERRETERÍA PROCONSTRUCTOR. TODOS LOS DERECHOS RESERVADOS.
             </p>
