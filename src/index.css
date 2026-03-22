@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-industrial-yellow: #FACC15;
+  --color-industrial-black: #171717;
+  --color-industrial-gray: #404040;
+  
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-50 text-industrial-black;
+  }
+}
+
+.glass-card {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+}
+
+.industrial-gradient {
+  background: linear-gradient(135deg, #171717 0%, #404040 100%);
+}
